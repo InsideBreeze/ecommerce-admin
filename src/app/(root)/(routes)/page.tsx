@@ -1,3 +1,9 @@
+"use client";
+
+import { useEffect } from "react";
+
+import { useStoreModal } from "@/hooks/use-store-modal";
+
 import { css } from "../../../../styled-system/css";
 
 interface SetupPageProps {
@@ -5,12 +11,17 @@ interface SetupPageProps {
 };
 
 const SetupPage: React.FC<SetupPageProps> = () => {
-    return (
-        <div className={css({
-            fontSize: "2xl",
-            fontWeight: "semibold"
-        })}>Setup Page</div>
-    );
+    const open = useStoreModal((store) => store.open);
+    const onOpen = useStoreModal((store) => store.onOpen);
+
+    useEffect(() => {
+        if (!open) {
+            onOpen();
+        }
+    }, [open, onOpen]);
+
+
+    return null;
 };
 
 export default SetupPage;
