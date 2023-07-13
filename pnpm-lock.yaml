@@ -23,6 +23,9 @@ dependencies:
   '@radix-ui/react-popover':
     specifier: ^1.0.6
     version: 1.0.6(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+  '@tanstack/react-table':
+    specifier: ^8.9.3
+    version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 20.4.1
     version: 20.4.1
@@ -50,6 +53,9 @@ dependencies:
   next:
     specifier: 13.4.9
     version: 13.4.9(@babel/core@7.22.8)(react-dom@18.2.0)(react@18.2.0)
+  next-cloudinary:
+    specifier: ^4.14.1
+    version: 4.14.1(next@13.4.9)(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -552,6 +558,29 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /@cloudinary-util/url-loader@3.9.0:
+    resolution: {integrity: sha512-DJiu+a3Mr2GEyjAo4Gy2KWX0YoXoP0CFp2jvw8+3gJj7wvmIb7mcjRk1yHSGIyJcolb0uR+tWGO6KVhStpreMg==}
+    dependencies:
+      '@cloudinary-util/util': 2.1.0
+      '@cloudinary/url-gen': 1.10.1
+    dev: false
+
+  /@cloudinary-util/util@2.1.0:
+    resolution: {integrity: sha512-PGjVxyhhOP8IaD6uawXzfDnI8ArPqpiLfIXc8TEjhv3CGhDFBAM3dCT3xeAgg+92sQsx/AN74j+qckdWPfoO6w==}
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk@1.2.10:
+    resolution: {integrity: sha512-R2UvWqX/eqHu7JaSk8lwl3wf1aBsmUXsBZf9kURsrGeV2rg1zzLZJuGsBFRWmOO01k/GB9ruTWsODV5oiRIxiA==}
+    dependencies:
+      '@cloudinary/url-gen': 1.10.1
+    dev: false
+
+  /@cloudinary/url-gen@1.10.1:
+    resolution: {integrity: sha512-6pBmapnL7G231NbNWhKbi+08HcpNASci7M3OmZWaUCQWUfdmo3au27HT3Zqg9NMsisfyer3t7o0RXzPQ4XlmMg==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.2.10
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -2141,6 +2170,23 @@ packages:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.6.0
+
+  /@tanstack/react-table@8.9.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Ng9rdm3JPoSCi6cVZvANsYnF+UoGVRxflMb270tVj0+LjeT/ZtZ9ckxF6oLPLcKesza6VKBqtdF9mQ+vaz24Aw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.9.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@tanstack/table-core@8.9.3:
+    resolution: {integrity: sha512-NpHZBoHTfqyJk0m/s/+CSuAiwtebhYK90mDuf5eylTvgViNOujiaOaxNDxJkQQAsVvHWZftUGAx1EfO1rkKtLg==}
+    engines: {node: '>=12'}
+    dev: false
 
   /@ts-morph/common@0.19.0:
     resolution: {integrity: sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==}
@@ -5785,6 +5831,19 @@ packages:
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    dev: false
+
+  /next-cloudinary@4.14.1(next@13.4.9)(react@18.2.0):
+    resolution: {integrity: sha512-hl1PHBs4WZO05DoGmNoX+AD5AtWKVV3BT+Q/72CHIjnUrh7O+szWSKI5Y+nXBoiEfgs/Zk/YTIZGVZtlYjZwMA==}
+    peerDependencies:
+      next: ^12 || ^13
+      react: ^17 || ^18
+    dependencies:
+      '@cloudinary-util/url-loader': 3.9.0
+      '@cloudinary-util/util': 2.1.0
+      '@cloudinary/url-gen': 1.10.1
+      next: 13.4.9(@babel/core@7.22.8)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /next@13.4.9(@babel/core@7.22.8)(react-dom@18.2.0)(react@18.2.0):

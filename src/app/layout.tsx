@@ -6,6 +6,7 @@ import ModalProvider from '@/providers/modal-provider'
 import ToasterProvider from '@/providers/toaster-provider'
 
 import './globals.css'
+import { container } from '../../styled-system/patterns'
 
 const inter = Inter({ subsets: ['latin'] })
 

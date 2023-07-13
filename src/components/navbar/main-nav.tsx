@@ -16,8 +16,13 @@ const MainNav: React.FC<MainNavProps> = () => {
     const routes = [
         {
             label: "Overview",
-            href: "/",
+            href: `/${params.storeId}`,
             active: pathname === `/${params.storeId}`
+        },
+        {
+            label: "Billboards",
+            href: `/${params.storeId}/billboards`,
+            active: pathname === `/${params.storeId}/billboards`
         },
         {
             label: "Settings",
