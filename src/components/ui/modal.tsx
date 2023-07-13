@@ -26,8 +26,10 @@ const Modal: React.FC<ModalProps> = ({
                 <Dialog.Overlay className={css({
                     pos: "fixed",
                     inset: 0,
+                    bg: "rgb(0 0 0 / 20%)"
                 })}/>
                 <Dialog.Content className={css({
+                    bg: "white",
                     position: "fixed",
                     top: "50%",
                     left: "50%",

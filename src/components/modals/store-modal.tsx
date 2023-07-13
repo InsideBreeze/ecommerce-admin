@@ -1,9 +1,12 @@
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as Label from '@radix-ui/react-label';
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import * as z from "zod";
 
-import Modal from "@/components/ui/modal"
+import Modal from "@/components/ui/modal";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { css, cva } from "../../../styled-system/css";
 import { hstack, stack } from "../../../styled-system/patterns";
@@ -21,7 +24,6 @@ const button = cva({
         w: "auto",
         rounded: "md",
         h: 10,
-        fontWeight: "semibold",
         px: 4,
         py: "5px",
         _hover: {
@@ -51,16 +53,29 @@ const button = cva({
 const StoreModal: React.FC<StoreModalProps> = () => {
 
     const storeModal = useStoreModal();
+    const [loading, setLoading] = useState(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
+    } = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
     });
 
-    const onSubmit = (values: z.infer<typeof schema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof schema>) => {
+        try {
+            setLoading(true);
+            const response = await axios.post("/api/stores", {
+                name: values.name
+            });
+            window.location.assign(`/${response.data.id}`)
+        } catch (err) {
+            toast.error("create store failed");
+        } finally {
+            setLoading(false);
+        }
+
+
     }
 
     return (
@@ -77,11 +92,14 @@ const StoreModal: React.FC<StoreModalProps> = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className={stack({
                     gap: 2
                 })}>
-                    <Label.Root>
+                    <Label.Root className={css({
+                        color: errors.name ? "red" : ""
+                    })}>
                         Name
                     </Label.Root>
                     <div>
                         <input
+                            disabled={loading}
                             placeholder="E-commerce"
                             className={css({
                                 p: 2,
@@ -96,17 +114,23 @@ const StoreModal: React.FC<StoreModalProps> = () => {
                             })}
                             {...register("name")}
                     />
+                        {errors.name && <p className={css({ color: "red", fontSize: "sm" })}>{errors.name.message}</p>}
                     </div>
                     <div className={hstack({
                             justify: "flex-end",
                             mt: 4
                         })}>
-                        <button className={button({
+                        <button
+                            onClick={storeModal.onClose}
+                            disabled={loading} className={button({
                             visual: "outline"
                         })}>
                                 Cancel
                         </button>
-                        <button className={button()}>
+                        <button
+                            disabled={loading}
+                            type="submit"
+                            className={button()}>
                             Continue
                         </button>
                     </div>

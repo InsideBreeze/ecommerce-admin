@@ -1,4 +1,5 @@
 import { defineConfig } from "@pandacss/dev"
+import { buttonRecipe } from "@/recipes/button-recipe"
 
 export default defineConfig({
     // Whether to use css reset
@@ -12,8 +13,13 @@ export default defineConfig({
 
     // Useful for theme customization
     theme: {
-      extend: {}
+      extend: {
+          recipes: {
+              button: buttonRecipe
+          }
+      }
     },
+
 
     // The output directory for your css system
     outdir: "styled-system",
