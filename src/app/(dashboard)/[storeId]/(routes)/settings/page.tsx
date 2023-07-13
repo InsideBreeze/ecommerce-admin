@@ -28,7 +28,7 @@ const SettingPage: React.FC<SettingPageProps> = async ({
             p: 8,
             pt: 6,
         })}>
-            <SettingForm initialName={store.name} />
+            <SettingForm store={store} />
         </div>
     );
 };

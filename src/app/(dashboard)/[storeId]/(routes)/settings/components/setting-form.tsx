@@ -16,9 +16,12 @@ import { center, divider, grid, hstack, stack, wrap } from "../../../../../../..
 import { css } from "../../../../../../../styled-system/css";
 import { button } from "../../../../../../../styled-system/recipes";
 import AlertModal from "@/components/modals/alert-modal";
+import ApiAlert from "@/components/ui/api-alert";
+import useOrigin from "@/hooks/use-origin";
+import { Store } from "@prisma/client";
 
 interface SettingFormProps {
-    initialName: string;
+    store: Store
 };
 
 
@@ -27,10 +30,11 @@ const schema = z.object({
 })
 
 const SettingForm: React.FC<SettingFormProps> = ({
-    initialName
+    store
 }) => {
     const [loading, setLoading] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
+    const origin = useOrigin();
 
     const router = useRouter();
     const params = useParams();
@@ -41,7 +45,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
     } = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
         defaultValues: {
-            name: initialName
+            name: store.name
         }
     });
 
@@ -158,6 +162,12 @@ const SettingForm: React.FC<SettingFormProps> = ({
             <div className={divider({
                 color: "slate.200"
             })} />
+
+            <ApiAlert
+                title="NEXT_PUBLIC_API_URL"
+                variant="Public"
+                description={`${origin}/api/${store.id}`}
+            />
 
         </div>
     );
