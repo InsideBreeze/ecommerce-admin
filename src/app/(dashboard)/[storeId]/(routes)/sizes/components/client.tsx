@@ -1,25 +1,28 @@
 "use client";
 
-import Heading from "@/components/ui/heading";
-import { divider, flex, hstack, wrap } from "../../../../../../../styled-system/patterns";
-import { button } from "../../../../../../../styled-system/recipes";
-import { Plus } from "lucide-react";
-import { css } from "../../../../../../../styled-system/css";
 import { useParams, useRouter } from "next/navigation";
 import { Billboard } from "@prisma/client";
-import columns, { BillboardColumn } from "./columns";
+import { Plus } from "lucide-react";
+
+import Heading from "@/components/ui/heading";
+import columns, { SizeColumn } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
 
-interface BillboardClientProps {
+import { divider, flex, hstack, wrap } from "../../../../../../../styled-system/patterns";
+import { button } from "../../../../../../../styled-system/recipes";
+import { css } from "../../../../../../../styled-system/css";
+
+interface SizeClientProps {
     data: {
         id: string;
-        label: string;
+        name: string;
+        value: string;
         createdAt: string;
     }[]
 };
 
-const BillboardClient: React.FC<BillboardClientProps> = ({
+const SizeClient: React.FC<SizeClientProps> = ({
     data
 }) => {
 
@@ -37,11 +40,11 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
                 w: "full",
             })}>
                 <Heading
-                    title={`Billboard (${data.length})`}
-                    description="Manage billboards for your store"
+                    title={`Size (${data.length})`}
+                    description="Manage sizes for your store"
                 />
                 <button
-                    onClick={() => router.push(`/${params.storeId}/billboards/new`)}
+                    onClick={() => router.push(`/${params.storeId}/sizes/new`)}
                     className={button()}>
                     <Plus className={css({
                         w: 4,
@@ -59,19 +62,19 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
             <DataTable
                 data={data}
                 columns={columns}
-                searchKey="label"
+                searchKey="name"
             />
             <Heading
                 title="API"
-                description="API calls for Billboards"
+                description="API calls for Sizes"
                 />
             <div className={divider({
                 color: "slate.200"
             })} />
 
-            <ApiList entityName="billboards" entityIdName="billboardId" />
+            <ApiList entityName="sizes" entityIdName="sizeId" />
         </div>
     );
 };
 
-export default BillboardClient;
+export default SizeClient;

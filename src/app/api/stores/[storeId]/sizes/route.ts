@@ -13,28 +13,28 @@ export async function POST(
     if (!userId) {
         return new NextResponse("Unauthenticated", { status: 401 });
     }
-    const { label, imageUrl } = await req.json();
+    const { name, value } = await req.json();
 
-    if (!label) {
-        return new NextResponse("Strore name is required", { status: 400 });
+    if (!name) {
+        return new NextResponse("Size name is required", { status: 400 });
     }
 
-    if (!imageUrl) {
-        return new NextResponse("Image url is required", { status: 400 });
+    if (!value) {
+        return new NextResponse("Size value is required", { status: 400 });
     }
 
     try {
-        const createdBillboard = await prismadb.billboard.create({
+        const createdSize = await prismadb.size.create({
             data: {
-                label,
-                imageUrl,
+                name,
+                value,
                 storeId: params.storeId
             }
         });
-        return NextResponse.json(createdBillboard);
+        return NextResponse.json(createdSize);
     } catch (err) {
         // Do something
-        console.log("[POST_BILLBOARDS]", err);
+        console.log("[POST_SIZES]", err);
         return new NextResponse("Internal error", { status: 500 });
     }
 }
@@ -52,15 +52,15 @@ export async function GET(
     }
 
     try {
-        const billboards = await prismadb.billboard.findMany({
+        const sizes = await prismadb.size.findMany({
             where: {
                 storeId
             }
         })
-        return NextResponse.json(billboards);
+        return NextResponse.json(sizes);
     } catch (err) {
         // Do something
-        console.log("[GET_BILLBOARDS]", err);
+        console.log("[GET_SIZES]", err);
         return new NextResponse("Internal error", { status: 500 });
     }
 

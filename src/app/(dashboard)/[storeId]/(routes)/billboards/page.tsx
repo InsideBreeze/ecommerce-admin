@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import prismadb from "@/lib/prismadb";
 import { css } from "../../../../../../styled-system/css";
 import BillboardClient from "./components/client";
@@ -8,6 +9,8 @@ interface BillboardPageProps {
     }
 };
 
+export const revalidate = 0;
+
 const BillboardPage: React.FC<BillboardPageProps> = async ({
     params
 }) => {
@@ -17,19 +20,18 @@ const BillboardPage: React.FC<BillboardPageProps> = async ({
             storeId: params.storeId
         }
     })
+
+    const formattedBillboards = billboards.map(billboard => ({
+        id: billboard.id,
+        label: billboard.label,
+        createdAt: format(billboard.createdAt, "MMMM do, yyyy")
+    }))
     return (
         <div className={css({
             p: 8,
             pt: 6,
         })}>
-            {
-                billboards.map(b => (
-                    <div key={b.id}>
-                        {b.id}
-                    </div>
-                ))
-            }
-            <BillboardClient data={billboards} />
+            <BillboardClient data={formattedBillboards} />
         </div>
     );
 };

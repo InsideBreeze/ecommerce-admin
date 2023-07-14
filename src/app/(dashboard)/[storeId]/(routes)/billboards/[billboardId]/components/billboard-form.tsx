@@ -100,6 +100,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                 open={openAlert}
                 onClose={() => setOpenAlert(false)}
                 onConfirm={onDelete}
+                loading={loading}
             />
             <div className={hstack({
                 justify: "space-between",
@@ -203,23 +204,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                     </div>
                 </form>
             </div>
-
-            {
-                data && (
-                    <>
-                        <div className={divider({
-                            color: "slate.200"
-                        })} />
-
-                        <ApiAlert
-                            title="NEXT_PUBLIC_API_URL"
-                            variant="Public"
-                            description={`${origin}/api/${data?.id}`}
-                        />
-                    </>
-                )
-            }
-
         </div>
     );
 };

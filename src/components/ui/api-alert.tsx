@@ -3,10 +3,10 @@ import { css } from "../../../styled-system/css";
 import { center, hstack } from "../../../styled-system/patterns";
 import { toast } from "react-hot-toast";
 
-interface ApiAlertProps {
+export interface ApiAlertProps {
     title: string;
     description: string;
-    variant: "admin" | "Public";
+    variant: "Admin" | "Public";
 };
 
 const ApiAlert: React.FC<ApiAlertProps> = ({
@@ -23,8 +23,7 @@ const ApiAlert: React.FC<ApiAlertProps> = ({
     }
     return (
         <div className={css({
-            p: 4,
-            pl: "44px",
+            p: "16px 16px 16px 44px",
             pos: "relative",
             border: "1px solid token(colors.slate.200)",
             w: "full",

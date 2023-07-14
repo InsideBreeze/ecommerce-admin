@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
     req: Request,
-    { params } : { params: { storeId: string, billboardId: string } }
+    { params } : { params: { storeId: string, colorId: string } }
 ) {
     const { userId } = auth();
 
@@ -12,28 +12,28 @@ export async function PUT(
         return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    const { storeId, billboardId } = params;
+    const { storeId, colorId } = params;
 
     if (!storeId) {
         return new NextResponse("Store id is required", { status: 400 });
     }
 
-    if (!billboardId) {
-        return new NextResponse("Billboard id is required", { status: 400 });
+    if (!colorId) {
+        return new NextResponse("Color id is required", { status: 400 });
     }
-    const { label, imageUrl } = await req.json();
+    const { name, value } = await req.json();
 
-    if (!label) {
-        return new NextResponse("Name is required", { status: 400 })
+    if (!name) {
+        return new NextResponse("Value name is required", { status: 400 })
     }
-    if (!imageUrl) {
-        return new NextResponse("Image url required", { status: 400 })
+    if (!value) {
+        return new NextResponse("Color value required", { status: 400 })
     }
 
     const storeByUser = await prismadb.store.findFirst({
         where: {
             id: params.storeId,
-            userId
+            userId,
         }
     })
 
@@ -42,20 +42,19 @@ export async function PUT(
     }
 
     try {
-        const updatedBillboard = await prismadb.billboard.updateMany({
+        const updatedColor = await prismadb.color.updateMany({
             where: {
-                id: params.billboardId
+                id: params.colorId
             },
             data: {
-                label,
-                imageUrl
+                name,
+                value
             }
         })
-        console.log(updatedBillboard, "updatedStore");
-        return NextResponse.json(updatedBillboard);
+        return NextResponse.json(updatedColor);
     } catch (err) {
         // Do something
-        console.log("[PUT_BILLBOARD]", err);
+        console.log("[PUT_COLOR]", err);
         return new NextResponse("Internal error", { status: 500 });
     }
 
@@ -63,7 +62,7 @@ export async function PUT(
 
 export async function DELETE(
     _req: Request,
-    { params } : { params: { storeId: string, billboardId: string } }
+    { params } : { params: { storeId: string, colorId: string } }
 ) {
     const { userId } = auth();
 
@@ -89,47 +88,48 @@ export async function DELETE(
     }
 
     try {
-        const result = await prismadb.billboard.deleteMany({
+        const result = await prismadb.color.deleteMany({
             where: {
-                id: params.billboardId
+                id: params.colorId
             }
         })
         return NextResponse.json(result);
     } catch (err) {
         // Do something
-        console.log("[DELETE_BILLBOARD]", err);
+        console.log("[DELETE_COLOR]", err);
         return new NextResponse("Internal error", { status: 500 });
     }
 
 }
 
+
 export async function GET(
     _req: Request,
     { params }: {
-        params: { storeId: string, billboardId: string }
+        params: { storeId: string, colorId: string }
     }
 ) {
-    const { storeId, billboardId } = params;
+    const { storeId, colorId } = params;
 
     if (!storeId) {
         return new NextResponse("Store id is required", { status: 400 });
     }
 
-    if (!billboardId) {
-        return new NextResponse("Billboard id is required", { status: 400 });
+    if (!colorId) {
+        return new NextResponse("Color id is required", { status: 400 });
     }
 
 
     try {
-        const billboard = await prismadb.billboard.findFirst({
+        const color = await prismadb.color.findFirst({
             where: {
-                id: billboardId
+                id: colorId
             }
         })
-        return NextResponse.json(billboard);
+        return NextResponse.json(color);
     } catch (err) {
         // Do something
-        console.log("[GET_BILLBOARD]", err);
+        console.log("[GET_COLOR]", err);
         return new NextResponse("Internal error", { status: 500 });
     }
 

@@ -10,6 +10,7 @@ interface AlertModalProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
+    loading: boolean
 };
 
 const AlertModal: React.FC<AlertModalProps> = ({
@@ -17,7 +18,8 @@ const AlertModal: React.FC<AlertModalProps> = ({
     description,
     open,
     onClose,
-    onConfirm
+    onConfirm,
+    loading
 }) => {
     return (
         <Modal
@@ -31,6 +33,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
                 mt: 8
             })}>
                 <button
+                    disabled={loading}
                     onClick={onClose}
                     className={button({
                     visual: "outline"
@@ -38,6 +41,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
                     Cancel
                 </button>
                 <button
+                    disabled={loading}
                     onClick={onConfirm}
                     className={button({
                     visual: "destructive"

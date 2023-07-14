@@ -25,6 +25,31 @@ const MainNav: React.FC<MainNavProps> = () => {
             active: pathname === `/${params.storeId}/billboards`
         },
         {
+            label: "Categories",
+            href: `/${params.storeId}/categories`,
+            active: pathname === `/${params.storeId}/categories`
+        },
+        {
+            label: "Sizes",
+            href: `/${params.storeId}/sizes`,
+            active: pathname === `/${params.storeId}/sizes`
+        },
+        {
+            label: "Colors",
+            href: `/${params.storeId}/colors`,
+            active: pathname === `/${params.storeId}/colors`
+        },
+        {
+            label: "Products",
+            href: `/${params.storeId}/products`,
+            active: pathname === `/${params.storeId}/products`
+        },
+        {
+            label: "Orders",
+            href: `/${params.storeId}/orders`,
+            active: pathname === `/${params.storeId}/orders`
+        },
+        {
             label: "Settings",
             href: `/${params.storeId}/settings`,
             active: pathname === `/${params.storeId}/settings`

@@ -6,20 +6,15 @@ import { button } from "../../../../../../../styled-system/recipes";
 import { Plus } from "lucide-react";
 import { css } from "../../../../../../../styled-system/css";
 import { useParams, useRouter } from "next/navigation";
-import { Billboard } from "@prisma/client";
-import columns, { BillboardColumn } from "./columns";
+import columns, { ProductColumn } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
 
-interface BillboardClientProps {
-    data: {
-        id: string;
-        label: string;
-        createdAt: string;
-    }[]
+interface ProductClientProps {
+    data: ProductColumn[]
 };
 
-const BillboardClient: React.FC<BillboardClientProps> = ({
+const ProductClient: React.FC<ProductClientProps> = ({
     data
 }) => {
 
@@ -37,11 +32,11 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
                 w: "full",
             })}>
                 <Heading
-                    title={`Billboard (${data.length})`}
-                    description="Manage billboards for your store"
+                    title={`Product (${data.length})`}
+                    description="Manage products for your store"
                 />
                 <button
-                    onClick={() => router.push(`/${params.storeId}/billboards/new`)}
+                    onClick={() => router.push(`/${params.storeId}/products/new`)}
                     className={button()}>
                     <Plus className={css({
                         w: 4,
@@ -59,19 +54,19 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
             <DataTable
                 data={data}
                 columns={columns}
-                searchKey="label"
+                searchKey="name"
             />
             <Heading
                 title="API"
-                description="API calls for Billboards"
+                description="API calls for Products"
                 />
             <div className={divider({
                 color: "slate.200"
             })} />
 
-            <ApiList entityName="billboards" entityIdName="billboardId" />
+            <ApiList entityName="products" entityIdName="productId" />
         </div>
     );
 };
 
-export default BillboardClient;
+export default ProductClient;

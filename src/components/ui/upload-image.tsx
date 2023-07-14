@@ -10,7 +10,7 @@ import { center, hstack } from '../../../styled-system/patterns';
 interface UploadImageProps {
     values: string[];
     onChange: (value: string) => void;
-    onCancel: () => void;
+    onCancel: (value: string) => void;
 };
 
 const UploadImage: React.FC<UploadImageProps> = ({
@@ -18,10 +18,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
     onChange,
     onCancel
 }) => {
-    console.log("field", values);
-
     const onUpload = (result: any) => {
-        console.log(result);
         onChange(result.info.secure_url)
     }
 
@@ -36,7 +33,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
                 }
                 return (
                     <div>
-                        <div className={css({
+                        <div className={hstack({
                             my: 2
                         })}>
                             {
@@ -52,7 +49,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
                                             fill
                                         />
                                         <button
-                                            onClick={onCancel}
+                                            onClick={() => onCancel(imageUrl)}
                                             className={center({
                                                 w: 10,
                                                 h: 10,
