@@ -1,26 +1,18 @@
-import { UserButton, auth } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
+import { Store } from "@prisma/client";
+
 import StoreSwitcher from "./store-switcher";
 import MainNav from "./main-nav";
-import { hstack } from "../../../styled-system/patterns";
-import { css } from "../../../styled-system/css";
-import { redirect } from "next/navigation";
-import prismadb from "@/lib/prismadb";
+import { hstack } from "styled-system/patterns";
+import { css } from "styled-system/css";
 
 interface NavbarProps {
+    data: Store[]
 };
 
-const Navbar: React.FC<NavbarProps> = async () => {
-    const { userId } = auth();
-
-    if (!userId) {
-        redirect("/");
-    }
-
-    const stores = await prismadb.store.findMany({
-        where: {
-            userId
-        }
-    });
+const Navbar: React.FC<NavbarProps> = async ({
+    data
+}) => {
 
     return (
         <div className={hstack({
@@ -28,7 +20,9 @@ const Navbar: React.FC<NavbarProps> = async () => {
             px: 4,
             borderBottom: "1px solid token(colors.slate.200)"
         })}>
-            <StoreSwitcher data={stores} />
+            <div>
+                <StoreSwitcher data={data} />
+            </div>
             <MainNav />
             <div className={css({
                 ml: "auto"

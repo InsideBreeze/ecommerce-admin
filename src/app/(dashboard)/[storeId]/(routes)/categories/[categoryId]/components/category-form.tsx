@@ -9,24 +9,21 @@ import * as Select from "@radix-ui/react-select";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { Check, ChevronDown, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { Billboard, Category } from "@prisma/client";
 
 import Heading from "@/components/ui/heading";
 import AlertModal from "@/components/modals/alert-modal";
-import useOrigin from "@/hooks/use-origin";
+import { SelectContent, SelectTrigger } from "@/components/ui/select-content";
 
 import { center, divider, flex, grid, hstack, stack } from "../../../../../../../../styled-system/patterns";
 import { css } from "../../../../../../../../styled-system/css";
 import { button } from "../../../../../../../../styled-system/recipes";
-import { SelectContent, SelectTrigger } from "@/components/ui/select-content";
-
 
 interface BillboardFormProps {
     data: Category | null,
     billboards: Billboard[]
 };
-
 
 const schema = z.object({
     name: z.string().min(1),
@@ -39,7 +36,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
 }) => {
     const [loading, setLoading] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
-    const origin = useOrigin();
 
     const router = useRouter();
     const params = useParams();
@@ -116,7 +112,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
             />
             <div className={hstack({
                 justify: "space-between",
-                w: "full"
             })}>
                 <Heading
                     title={title}
@@ -146,9 +141,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                 color: "slate.200"
             })} />
 
-            <div className={css({
-                w: "full"
-            })}>
+            <div>
                 <form onSubmit={handleSubmit(onSubmit)} className={stack({
                     gap: 6
                 })}>
@@ -174,7 +167,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                                     className={css({
                                         p: 2,
                                         px: 3,
-                                        w: "full",
                                         border: "1px solid token(colors.slate.200)",
                                         rounded: "md",
                                         _focus: {
@@ -208,76 +200,13 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                                             defaultValue={data?.billboardId || ""}
                                             value=""
                                         >
-
                                             <SelectTrigger>
                                                 {billboards.find((billboard) => billboard.id === field.value)?.label}
                                             </SelectTrigger>
-                                            {/* <Select.Trigger asChild>
-                                                <div className={css({
-                                                    px: 3,
-                                                    py: 2,
-                                                    rounded: "md",
-                                                    border: "1px solid token(colors.slate.200)"
-                                                })}>
-                                                    <button className={hstack({
-                                                        justify: "space-between",
-                                                        h: 6,
-                                                        w: "full"
-                                                    })}>
-                                                        <Select.Value
-                                                            className={css({
-                                                                fontSize: 14
-                                                            })}>
-                                                            {billboards.find((billboard) => billboard.id === field.value)?.label}
-                                                        </Select.Value>
-                                                        <ChevronDown size={16} />
-                                                    </button>
-                                                </div>
-                                            </Select.Trigger> */}
-
-
                                             <SelectContent
                                                 data={billboards}
                                                 value={field.value}
                                             />
-
-                                            {/* <Select.Content
-                                                position="popper"
-                                                className={css({
-                                                    w: "var(--radix-select-trigger-width)",
-                                                    overflow: "hidden",
-                                                    shadow: "xl",
-                                                    border: "1px solid token(colors.slate.200)",
-                                                    p: 1,
-                                                    rounded: "md"
-                                                })}>
-                                                <Select.Viewport>
-                                                    {
-                                                        billboards.map((billboard) => (
-                                                            <Select.Item key={billboard.id} value={billboard.id} className={hstack({
-                                                                w: "full",
-                                                                px: 2,
-                                                                py: 1,
-                                                                rounded: "md",
-                                                                outline: "none",
-                                                                _hover: {
-                                                                    bg: "slate.100",
-                                                                    cursor: "pointer",
-                                                                }
-                                                            })}>
-                                                                <Check className={css({
-                                                                    h: 4,
-                                                                    w: 4,
-                                                                    color: "slate.600",
-                                                                    opacity: field.value === billboard.id ? "100%" : "0%"
-                                                                })} />
-                                                                {billboard.label}
-                                                            </Select.Item>
-                                                        ))
-                                                    }
-                                                </Select.Viewport>
-                                            </Select.Content> */}
-
                                         </Select.Root>
                                     </div>
                                 )}
@@ -291,7 +220,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                             {buttonLabel}
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>

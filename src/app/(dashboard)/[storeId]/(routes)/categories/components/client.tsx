@@ -1,23 +1,19 @@
 "use client";
 
-import Heading from "@/components/ui/heading";
-import { divider, flex, hstack, wrap } from "../../../../../../../styled-system/patterns";
-import { button } from "../../../../../../../styled-system/recipes";
 import { Plus } from "lucide-react";
-import { css } from "../../../../../../../styled-system/css";
 import { useParams, useRouter } from "next/navigation";
-import { Billboard } from "@prisma/client";
+
+import Heading from "@/components/ui/heading";
 import columns, { CategoryColumn } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
 
+import { divider, flex, hstack } from "../../../../../../../styled-system/patterns";
+import { button } from "../../../../../../../styled-system/recipes";
+import { css } from "../../../../../../../styled-system/css";
+
 interface CategoryClientProps {
-    data: {
-        id: string;
-        name: string;
-        createdAt: string;
-        billboard: string
-    }[]
+    data: CategoryColumn[]
 };
 
 const CategoryClient: React.FC<CategoryClientProps> = ({
@@ -31,11 +27,9 @@ const CategoryClient: React.FC<CategoryClientProps> = ({
         <div className={flex({
             direction: "column",
             gap: 4,
-            w: "full",
         })}>
             <div className={hstack({
                 justify: "space-between",
-                w: "full",
             })}>
                 <Heading
                     title={`Category (${data.length})`}

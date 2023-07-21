@@ -2,14 +2,12 @@
 
 import * as Popover from '@radix-ui/react-popover';
 import { Command } from 'cmdk';
-import { ChevronsUpDown, PlusCircle, Store } from 'lucide-react';
-
-import { css } from "../../../styled-system/css";
-import { center, flex, hstack } from '../../../styled-system/patterns';
-import { Search } from 'lucide-react';
+import { ChevronsUpDown, PlusCircle, Store, Search, Check } from 'lucide-react';
 import { Store as StoreType } from '@prisma/client';
-import { Check } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
+
+import { css } from "styled-system/css";
+import { center, hstack } from 'styled-system/patterns';
 import { useStoreModal } from '@/hooks/use-store-modal';
 
 interface StoreSwitcherProps {
@@ -40,16 +38,21 @@ const StoreSwitcher: React.FC<StoreSwitcherProps> = ({
                     border: "1px solid token(colors.slate.200)",
                     p: 2,
                     rounded: "md",
+                    transition: "color",
                     _hover: {
                         cursor: "pointer",
                         bg: "slate.100"
                     }
                 })}>
                     <Store size={16} />
-                    {currentStore?.label}
-                    <ChevronsUpDown size={16} className={css({
+                    <span>
+                        {currentStore?.label}
+                    </span>
+                    <ChevronsUpDown className={css({
+                        m: 4,
+                        w: 4,
                         ml: "auto",
-                        color: "slate.500"
+                        color: "slate.500",
                     })} />
                 </button>
             </Popover.Trigger>
@@ -85,6 +88,13 @@ const StoreSwitcher: React.FC<StoreSwitcherProps> = ({
                                 })} />
                         </div>
                         <Command.List>
+                            <Command.Empty className={css({
+                                py: 6,
+                                textAlign: "center",
+                                fontSize: "sm"
+                            })}>
+                                No store found.
+                            </Command.Empty>
                             <Command.Group heading="Stores" className={css({
                                 fontSize: "sm",
                                 p: 2,
@@ -96,6 +106,9 @@ const StoreSwitcher: React.FC<StoreSwitcherProps> = ({
                                 },
                                 borderBottom: "1px solid token(colors.slate.200)"
                             })}>
+
+
+
                                 {formattedStores.map((store) => (
                                     <Command.Item
                                         key={store.id}
@@ -104,6 +117,7 @@ const StoreSwitcher: React.FC<StoreSwitcherProps> = ({
                                             p: 1,
                                             py: 2,
                                             rounded: "md",
+                                            transition: "color",
                                             "&[data-selected=true]": {
                                                 bg: "slate.100"
                                             },
@@ -130,19 +144,18 @@ const StoreSwitcher: React.FC<StoreSwitcherProps> = ({
                                 <Command.Item
                                     onSelect={storeModal.onOpen}
                                     className={hstack({
-                                            p: 2,
-                                            rounded: "md",
-                                            "&[data-selected=true]": {
-                                                bg: "slate.100"
-                                            },
-                                            _hover: {
-                                                cursor: "pointer"
-                                            }
-                                        })}>
-                                            <PlusCircle size={20} />
-                                            Create store
+                                        p: 2,
+                                        rounded: "md",
+                                        "&[data-selected=true]": {
+                                            bg: "slate.100"
+                                        },
+                                        _hover: {
+                                            cursor: "pointer"
+                                        }
+                                    })}>
+                                    <PlusCircle size={20} />
+                                    Create store
                                 </Command.Item>
-
                             </Command.Group>
                         </Command.List>
                     </Command>

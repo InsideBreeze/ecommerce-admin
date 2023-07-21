@@ -15,15 +15,12 @@ const BillboardPage: React.FC<BillboardPageProps> = async ({
         billboardId
     }
 }) => {
-
     const billboard = await prismadb.billboard.findUnique({
         where: {
             id: billboardId,
             storeId
         }
     });
-
-    console.log("billboard", billboard);
 
     return (
         <div className={css({

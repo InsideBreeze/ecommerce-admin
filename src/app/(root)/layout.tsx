@@ -11,11 +11,9 @@ const SetupPageLayout: React.FC<SetupPageLayoutProps> = async ({
 }) => {
 
     const { userId } = auth();
-
     if (!userId) {
         redirect("/")
     }
-
     const store = await prismadb.store.findFirst({
         where: {
             userId

@@ -5,11 +5,7 @@ import { css } from "../../../styled-system/css";
 import { hstack } from "../../../styled-system/patterns";
 import Link from "next/link";
 
-interface MainNavProps {
-
-};
-
-const MainNav: React.FC<MainNavProps> = () => {
+const MainNav = () => {
 
     const pathname = usePathname()
     const params = useParams();

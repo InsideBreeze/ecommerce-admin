@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 const useOrigin = () => {
     const [isMounted, setIsMounted] = useState(false);
 
-    const origin = typeof window !== undefined && (window.location.origin || "");
 
     useEffect(() => {
         setIsMounted(true);
@@ -12,6 +11,7 @@ const useOrigin = () => {
     if (!isMounted) {
         return "";
     }
+    const origin = typeof window !== undefined && (window.location.origin || "");
 
     return origin;
 }

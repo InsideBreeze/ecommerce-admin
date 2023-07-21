@@ -1,7 +1,9 @@
 import { format } from "date-fns";
+
 import prismadb from "@/lib/prismadb";
-import { css } from "../../../../../../styled-system/css";
 import CategoryClient from "./components/client";
+
+import { css } from "../../../../../../styled-system/css";
 
 interface CategoryPageProps {
     params: {
@@ -31,7 +33,6 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         billboard: category.billboard.label
     }))
 
-    console.log("categores", formattedCategorys)
     return (
         <div className={css({
             p: 8,

@@ -13,18 +13,15 @@ import { Billboard } from "@prisma/client";
 
 import Heading from "@/components/ui/heading";
 import AlertModal from "@/components/modals/alert-modal";
-import ApiAlert from "@/components/ui/api-alert";
-import useOrigin from "@/hooks/use-origin";
+import UploadImage from "@/components/ui/upload-image";
 
-import { center, divider, grid, hstack, stack, wrap } from "../../../../../../../../styled-system/patterns";
+import { center, divider, flex, grid, hstack, stack } from "../../../../../../../../styled-system/patterns";
 import { css } from "../../../../../../../../styled-system/css";
 import { button } from "../../../../../../../../styled-system/recipes";
-import UploadImage from "@/components/ui/upload-image";
 
 interface BillboardFormProps {
     data: Billboard | null
 };
-
 
 const schema = z.object({
     label: z.string().min(1),
@@ -36,7 +33,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
 }) => {
     const [loading, setLoading] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
-    const origin = useOrigin();
 
     const router = useRouter();
     const params = useParams();
@@ -65,10 +61,10 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                 await axios.post(`/api/stores/${params.storeId}/billboards`, values);
                 toast.success("create billboard successed.");
             } else {
-                console.log("values", values);
                 await axios.put(`/api/stores/${params.storeId}/billboards/${params.billboardId}`, values);
                 toast.success("update billboard successed.");
             }
+            router.refresh();
             router.push(`/${params.storeId}/billboards`);
         } catch (err) {
             // Do something
@@ -91,7 +87,8 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
     }
 
     return (
-        <div className={wrap({
+        <div className={flex({
+            direction: "column",
             gap: 4,
         })}>
             <AlertModal
@@ -104,7 +101,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
             />
             <div className={hstack({
                 justify: "space-between",
-                w: "full"
             })}>
                 <Heading
                     title={title}
@@ -134,9 +130,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({
                 color: "slate.200"
             })} />
 
-            <div className={css({
-                w: "full"
-            })}>
+            <div>
                 <form onSubmit={handleSubmit(onSubmit)} className={stack({
                     gap: 6
                 })}>

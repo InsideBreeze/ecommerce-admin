@@ -1,22 +1,19 @@
 "use client";
 
-import Heading from "@/components/ui/heading";
-import { divider, flex, hstack, wrap } from "../../../../../../../styled-system/patterns";
-import { button } from "../../../../../../../styled-system/recipes";
 import { Plus } from "lucide-react";
-import { css } from "../../../../../../../styled-system/css";
 import { useParams, useRouter } from "next/navigation";
-import { Billboard } from "@prisma/client";
+
+import Heading from "@/components/ui/heading";
 import columns, { BillboardColumn } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
 
+import { divider, flex, hstack } from "../../../../../../../styled-system/patterns";
+import { button } from "../../../../../../../styled-system/recipes";
+import { css } from "../../../../../../../styled-system/css";
+
 interface BillboardClientProps {
-    data: {
-        id: string;
-        label: string;
-        createdAt: string;
-    }[]
+    data: BillboardColumn[]
 };
 
 const BillboardClient: React.FC<BillboardClientProps> = ({
@@ -30,11 +27,9 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
         <div className={flex({
             direction: "column",
             gap: 4,
-            w: "full",
         })}>
             <div className={hstack({
                 justify: "space-between",
-                w: "full",
             })}>
                 <Heading
                     title={`Billboard (${data.length})`}

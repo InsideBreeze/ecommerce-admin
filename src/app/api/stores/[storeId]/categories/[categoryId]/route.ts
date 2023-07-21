@@ -124,6 +124,9 @@ export async function GET(
         const category = await prismadb.category.findFirst({
             where: {
                 id: categoryId
+            },
+            include: {
+                billboard: true
             }
         })
         return NextResponse.json(category);

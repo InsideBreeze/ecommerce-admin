@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import { css } from "../../../../../../../styled-system/css";
+import { css } from "styled-system/css";
 import ProductForm from "./components/product-form";
 
 interface ProductPageProps {

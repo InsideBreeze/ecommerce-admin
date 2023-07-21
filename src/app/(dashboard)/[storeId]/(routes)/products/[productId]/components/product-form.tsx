@@ -18,9 +18,9 @@ import AlertModal from "@/components/modals/alert-modal";
 import UploadImage from "@/components/ui/upload-image";
 import { SelectContent, SelectTrigger } from "@/components/ui/select-content";
 
-import { center, divider, flex, grid, hstack, stack } from "../../../../../../../../styled-system/patterns";
-import { css } from "../../../../../../../../styled-system/css";
-import { button } from "../../../../../../../../styled-system/recipes";
+import { center, divider, flex, grid, hstack, stack } from "styled-system/patterns";
+import { css } from "styled-system/css";
+import { button } from "styled-system/recipes";
 
 
 interface ProductFormProps {

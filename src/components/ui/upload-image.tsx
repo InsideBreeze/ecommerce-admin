@@ -4,8 +4,8 @@ import { CldUploadWidget } from 'next-cloudinary';
 import Image from "next/image";
 import { ImagePlus, Trash } from 'lucide-react';
 
-import { css } from '../../../styled-system/css';
-import { center, hstack } from '../../../styled-system/patterns';
+import { css } from 'styled-system/css';
+import { center, hstack } from 'styled-system/patterns';
 
 interface UploadImageProps {
     values: string[];
@@ -78,7 +78,10 @@ const UploadImage: React.FC<UploadImageProps> = ({
                                 py: 2,
                                 rounded: "md",
                                 fontWeight: "medium",
-                                fontSize: "sm"
+                                fontSize: "sm",
+                                _hover: {
+                                    cursor: "pointer"
+                                }
                             })} onClick={handleOnClick}>
                                 <ImagePlus size={16} />
                                 Upload an Image

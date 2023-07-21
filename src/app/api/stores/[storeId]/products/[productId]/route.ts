@@ -159,6 +159,12 @@ export async function GET(
         const product = await prismadb.product.findFirst({
             where: {
                 id: productId
+            },
+            include: {
+                images: true,
+                color: true,
+                size: true,
+                category: true
             }
         })
         return NextResponse.json(product);

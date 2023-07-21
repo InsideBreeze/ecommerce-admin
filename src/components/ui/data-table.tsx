@@ -1,8 +1,9 @@
-import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
-import { css } from "../../../styled-system/css";
 import { useState } from "react";
-import { hstack } from "../../../styled-system/patterns";
-import { button } from "../../../styled-system/recipes";
+import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
+
+import { css } from "styled-system/css";
+import { hstack } from "styled-system/patterns";
+import { button } from "styled-system/recipes";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

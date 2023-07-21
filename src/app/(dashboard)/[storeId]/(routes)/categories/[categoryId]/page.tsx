@@ -1,6 +1,7 @@
 import prismadb from "@/lib/prismadb";
-import { css } from "../../../../../../../styled-system/css";
 import CategoryForm from "./components/category-form";
+
+import { css } from "../../../../../../../styled-system/css";
 
 interface CategoryPageProps {
     params: {

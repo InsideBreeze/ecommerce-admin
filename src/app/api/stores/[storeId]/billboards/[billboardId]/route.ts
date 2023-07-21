@@ -124,7 +124,7 @@ export async function GET(
         const billboard = await prismadb.billboard.findFirst({
             where: {
                 id: billboardId
-            }
+            },
         })
         return NextResponse.json(billboard);
     } catch (err) {
