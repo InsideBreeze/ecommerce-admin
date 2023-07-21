@@ -27,7 +27,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
             onUpload={onUpload}
             uploadPreset='ml_default'>
             {({ open }) => {
-                function handleOnClick(e) {
+                function handleOnClick(e: React.MouseEvent<HTMLElement>) {
                     e.preventDefault();
                     open();
                 }

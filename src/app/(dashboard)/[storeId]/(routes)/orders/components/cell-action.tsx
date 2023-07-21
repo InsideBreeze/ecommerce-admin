@@ -2,7 +2,7 @@
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import { BillboardType } from "./columns";
+import { OrderColumn } from "./columns";
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { css } from '../../../../../../../styled-system/css';
 import { center, hstack } from '../../../../../../../styled-system/patterns';
@@ -13,7 +13,7 @@ import { useState } from 'react';
 import AlertModal from '@/components/modals/alert-modal';
 
 interface CellActionProps {
-    data: BillboardType
+    data: OrderColumn
 };
 
 const CellAction: React.FC<CellActionProps> = ({

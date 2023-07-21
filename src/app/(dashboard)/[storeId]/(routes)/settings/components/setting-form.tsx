@@ -81,6 +81,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
             gap: 4,
         })}>
             <AlertModal
+                loading={loading}
                 title="Are you sure?"
                 description="This action cannot be undone"
                 open={openAlert}

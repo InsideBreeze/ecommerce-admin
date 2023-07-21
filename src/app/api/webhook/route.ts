@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { header, headers } from "next/headers";
+import { headers } from "next/headers";
 
 import { NextResponse } from "next/server";
 
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
             },
             data: {
                 isPaid: true,
-                adress: addressString,
+                address: addressString,
                 phone: session?.customer_details?.phone || ""
             },
             include: {

@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-
 import prismadb from "@/lib/prismadb";
 import { css } from "../../../../../../styled-system/css";
 import OrderClient from "./components/client";
@@ -35,11 +33,15 @@ const OrderPage: React.FC<OrderPageProps> = async ({
     const formattedOrders = orders.map(order => ({
         id: order.id,
         phone: order.phone,
-        adress: order.adress,
+        address: order.address,
         totalPrice: order.orderItems.reduce((total, item) => total + Number(item.product.price), 0),
         paid: order.isPaid,
         products: order.orderItems.map(item => item.product.name).join(" ")
     }));
+
+
+
+
 
     return (
         <div className={css({
